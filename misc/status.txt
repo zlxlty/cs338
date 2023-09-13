@@ -1,0 +1,8 @@
+Tianyi Lu (Sky)
+
+Plan for using Kali
+- For learning computer security and fun.
+
+Status of Kali intsallation
+- Installed and booted successfully
+- Have problems installing burp suite
