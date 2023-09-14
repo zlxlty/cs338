@@ -1,0 +1,63 @@
+Tianyi Lu (Sky)
+
+===== DAYTIME =====
+- Frame Summaries:
+1	0.000000000	192.168.64.6	129.6.15.28	TCP	74	59036 → 13 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=160238726 TSecr=0 WS=128
+2	0.104293307	129.6.15.28	192.168.64.6	TCP	66	13 → 59036 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1382 WS=64 SACK_PERM
+3	0.104426900	192.168.64.6	129.6.15.28	TCP	54	59036 → 13 [ACK] Seq=1 Ack=1 Win=64256 Len=0
+
+- Client Port: 
+59036
+
+- Why does the client need a port:
+There can be multiple applications (or multiple TCP connections) running on client and they all share the same IP address.
+Different port numbers are assigned to them to help other services connect to the application they want.
+
+- Frame containing the actual date and time:
+4	0.140034105	129.6.15.28	192.168.64.6	DAYTIME	105	DAYTIME Response
+
+- What is the full content (not counting the Ethernet, IP, and TCP headers) of the frame? What do each of the pieces of the frame content represent? (Most of the frame content is things like the year, month, day, hour, etc., but there's a little more info, too.)
+60201 23-09-14 17:23:47 50 0 0 243.3 UTC(NIST) *
+
+`60201`: This is the Modified Julian Date, marking how many days have passed since Noverment 17, 1858
+`50`: This indicated we are not in Daylight Saving Time. Will be `00` is Standard Time is in effective.
+`0`: The first zero after `50` shows the number of leap second to be added to the time shown.
+`0`: The second zero after `50` gives correction factor to convert UTC to UT1.
+`UTC(NIST)`: This shows we are receiving Coordinated Universal Time from the National Institude of Standards and Technology.
+`*`: This is the On-time Marker. `*` means the time we received is the arraval time of the On-time Marker.
+
+// Information on the ACTS time format is from this website:
+// https://www.nist.gov/pml/time-and-frequency-division/time-distribution/automated-computer-time-service-acts
+
+- What does [SYN] mean?
+SYN is a flag in TCP connection. It means one side is tring to synchronize with the other by providing a sequence number.
+- What does [ACK] mean?
+ACK is also a flag in TCP connection. It shows one side has acknowledged the other side's synchronization request by sending back the sequence number plus one.
+- What does [FIN] mean?
+FIN is a TCP flag that indicated the sender has transitted all the data and wants to end the TCP connection.
+
+- Which entity (the nc client or the daytime server) initiated the closing of the TCP connection? How can you tell?
+The daytime server initiated the closing because the daytime server sent the frame containing the FIN flag.
+6	0.140034646	129.6.15.28	192.168.64.6	TCP	54	13 → 59036 [FIN, ACK] Seq=52 Ack=1 Win=66368 Len=0
+
+===== HTTP =====
+- How many TCP connections were opened? How can you tell?
+Four TCP connections were opened. We can determine this by looking at how many distinct ports on client sent the SYN and ACK frames.
+For my capture, I have four:
+4	0.117839818	192.168.64.6	45.79.89.123	TCP	54	44714 → 443 [ACK] Seq=1 Ack=1 Win=64256 Len=0
+6	0.117848818	192.168.64.6	45.79.89.123	TCP	54	44718 → 443 [ACK] Seq=1 Ack=1 Win=64256 Len=0
+43	0.291930792	192.168.64.6	45.79.89.123	TCP	54	48462 → 80 [ACK] Seq=1 Ack=1 Win=64256 Len=0
+75	0.516671414	192.168.64.6	45.79.89.123	TCP	54	48472 → 80 [ACK] Seq=1 Ack=1 Win=64256 Len=0
+
+- Can you tell where my homepage (index.html) was requested?
+44	0.292142674	192.168.64.6	45.79.89.123	HTTP	417	GET /index.html HTTP/1.1 
+This is a HTTP get request sent by the client for index.html. The response can be found in a later frame:
+46	0.344735260	45.79.89.123	192.168.64.6	HTTP	639	HTTP/1.1 200 OK  (text/html)
+
+- Can you tell where my photograph (jeff_square_head.jpg) was requested?
+48	0.364104859	192.168.64.6	45.79.89.123	HTTP	386	GET /jeff_square_head.jpg HTTP/1.1
+This frame requested Jeff's photograph, with the response as follows:
+94	0.524867793	45.79.89.123	192.168.64.6	HTTP	233	HTTP/1.1 200 OK  (JPEG JFIF image)
+
+===== QUESTIONS =====
+
