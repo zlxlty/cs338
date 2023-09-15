@@ -23,6 +23,7 @@ Different port numbers are assigned to them to help other services connect to th
 `50`: This indicated we are not in Daylight Saving Time. Will be `00` is Standard Time is in effective.
 `0`: The first zero after `50` shows the number of leap second to be added to the time shown.
 `0`: The second zero after `50` gives correction factor to convert UTC to UT1.
+`243.4`: The number of milliseconds that NIST advances the time code
 `UTC(NIST)`: This shows we are receiving Coordinated Universal Time from the National Institude of Standards and Technology.
 `*`: This is the On-time Marker. `*` means the time we received is the arraval time of the On-time Marker.
 
