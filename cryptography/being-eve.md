@@ -5,7 +5,7 @@ $$
 \begin{align}
 &A\equiv g^{a}\text{ mod }p \\
 &B\equiv g^{b}\text{ mod }p  \\
-&K\equiv A^{b}\equiv B^{a}\text{ mod }p
+&K\equiv A^{b}\equiv B^{a}\text{ mod }p\\
 \end{align}
 $$
 To figure out the value of K, we start by calculating the value of $a$ or $b$. We can iterate value of $b$ from one and using brutely force to check whether the current value produce our known $A$. The code is as follows:
