@@ -1,0 +1,63 @@
+Part 1
+Total time: 0.19s
+Number of hashes computed: 267516 
+Passwords cracked: 21872
+Time per hash computed: 7.1 * 10^-7 second
+Time per password cracked: 8.7 * 10^-6 second
+Passwords cracked per number of hashes computed: 8.2 * 10^-2
+
+Part 2
+Total time: 890.07 seconds
+Number of hashes computed: 1246892076 
+Passwords cracked: 51
+Time per hash computed: 7.1 * 10^-7 second
+Time per password cracked: 17.5 seconds
+Passwords cracked per number of hashes computed: 4.1 * 10^-8
+
+Part 3
+Total time: 476.61 seconds
+Number of hashes computed: 731388744 
+Passwords cracked: 2734
+Time per hash computed: 6.5 * 10^-7 second
+Time per password cracked: 0.17 seconds
+Passwords cracked per number of hashes computed: 3.7 * 10^-6
+
+Analysis:
+We can denote the number of words in words.txt as n and the number of passwords as m.
+Our algorithm in part1 first calculate hashes for all n words, and then iterate through all passwords
+to find matches. Thus, part1 algorithm has complexity O(n+m)
+In part2, the algorithm iterates through all n words. For each word, it will calculte n hashes with 
+the current word as prefix. It also has an inner for loop checking all m passwords with the current 
+hash table. So, part2 algorithm has complexity O(n^2+nm)
+Because of salts, part3 algorithm has to compute n hashes for every password entry. Therefore, 
+it has complexity O(nm)
+
+- Did your time per hash computed change between phases? By what factor? Why?
+Time per hash computed didn't change much between phases. This is because for all three algorithms, 
+hashes are calculated in the inner loop.
+This means the number of hashes computed has a linear relationship with the time spent. As a result, 
+time per hash computed is a constant.
+
+- Did your time per password crack change between phases? By what factor? Why?
+Yes. From part1 to part2, time per password cracked increased by a factor of 2*10^6. This is because 
+for every single password cracked, part1 has to compute n/m hashes, while part2 has to compute n^2/m hash.
+From part1 to part3, time per password cracked increased by a factor of 102. This is because for every
+single password cracked, part3 has to compute n hashes. The ratio between n and n/m is close to 102.
+
+- Suppose you wanted to precompute all the hashes for each possible password
+so you could just look up the password in a table indexed by the hash. How much
+memory would be required for each phase?
+Each { hash_string: password } entry takes up roughly 32+16+32= 80 bytes
+Part1: In this phase, we need one entry for every word in word.txt. So, the total memory needed is 80*267516=21401280 bytes.
+Part2: We need to store all possible two-word combination in the hashmap. So, the total memory needed is 80*267516^2=5,725,184,820,480 bytes.
+Part3: We need to store hashes for every word for every user. So, the total memory needed is 80*267516*2734=58,511,099,520 bytes.
+
+- Give 3-4 reasons we should store password hashes and not the passwords themselves.
+Think in terms of threats, who the attackers might be, etc.
+1. If an outside attacker gains unauthorized access to a database, they will find only hashed passwords, 
+not the actual passwords. This keeps the origin password for the user safe even when the server is compromised.
+2. Many users reuse the same password across multiple services. If actual passwords are stored and 
+a database is breached, attackers could potentially access not just one account, but multiple accounts 
+across different platforms. 
+3. By storing hashes, the server's maintainers also can't learn the plaintext passwords. This ensures
+data privacy and helps maintain user trust to the server.
