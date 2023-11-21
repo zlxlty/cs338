@@ -43,14 +43,26 @@
             "id": "7f0f4ef4371838ea",
             "type": "leaf",
             "state": {
+              "type": "markdown",
+              "state": {
+                "file": "misc/ethics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f6c537c079d42b42",
+            "type": "leaf",
+            "state": {
               "type": "image",
               "state": {
-                "file": "hacking/Pasted image 20231121013714.png"
+                "file": "misc/Pasted image 20231121041631.png"
               }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -116,7 +128,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "hacking/Pasted image 20231121013714.png",
+                "file": "misc/Pasted image 20231121041631.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +145,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "hacking/Pasted image 20231121013714.png",
+                "file": "misc/Pasted image 20231121041631.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +168,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "hacking/Pasted image 20231121013714.png"
+                "file": "misc/Pasted image 20231121041631.png"
               }
             }
           }
@@ -179,6 +191,11 @@
   },
   "active": "fc48988300864e3a",
   "lastOpenFiles": [
+    "misc/stride.md",
+    "misc/stride.pdf",
+    "README.md",
+    "misc/ethics.md",
+    "misc/Pasted image 20231121041631.png",
     "hacking/Pasted image 20231121024420.png",
     "hacking/Pasted image 20231121013714.png",
     "hacking/arp-poisoning.md",
@@ -190,12 +207,8 @@
     "hacking/Pasted image 20231121021545.png",
     "hacking/Pasted image 20231121015438.png",
     "hacking/Pasted image 20231121014746.png",
-    "hacking/Pasted image 20231121014720.png",
-    "hacking/Pasted image 20231121014241.png",
-    "misc/ethics.md",
     "misc/ethics.pdf",
     "hacking/xss.md",
-    "README.md",
     "hacking/xss.pdf",
     "hacking"
   ]
